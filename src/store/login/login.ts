@@ -1,16 +1,16 @@
 import type { Module } from 'vuex';
-import { useRouter } from 'vue-router';
+import router from '@/router';
 import localCache from '@/utils/cache';
+import { mapMenusToRoutes } from '@/utils/map-menus';
 import {
   accountLoginRequest,
   requestUserInfoById,
   requestUserMenusByRoleId,
-} from 'service/login/login';
-import type { IAccount } from 'service/login/types';
+} from '@/service/login/login';
+import type { IAccount } from '@/service/login/types';
 import type { ILoginState } from './types';
 import type { IRootState } from '../type';
 
-const router = useRouter();
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
   state() {
@@ -31,6 +31,10 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserMenus(state, userMenus: []) {
       state.userMenus = userMenus;
+      const routes = mapMenusToRoutes(userMenus);
+      routes.forEach((route) => {
+        router.addRoute('main', route);
+      });
     },
   },
   actions: {
@@ -50,6 +54,20 @@ const loginModule: Module<ILoginState, IRootState> = {
       commit('changeUserMenus', userMenus);
       localCache.setCache('userMenus', userMenus);
       router.push('/main');
+    },
+    loadLocalLogin({ commit, dispatch }) {
+      const token = localCache.getCache('token');
+      if (token) {
+        commit('changeToken', token);
+      }
+      const userInfo = localCache.getCache('userInfo');
+      if (userInfo) {
+        commit('changeUserInfo', userInfo);
+      }
+      const userMenus = localCache.getCache('userMenus');
+      if (userMenus) {
+        commit('changeUserMenus', userMenus);
+      }
     },
   },
 };

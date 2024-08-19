@@ -1,9 +1,12 @@
 <template>
-  <nav>
-    <router-link to="/">Main</router-link> |
+  <!-- <nav>
+    <router-link to="/">Main</router-link>
     <router-link to="/login">Login</router-link>
   </nav>
-  <router-view />
+  <router-view /> -->
+  <el-config-provider>
+    <router-view></router-view>
+  </el-config-provider>
 </template>
 
 <style lang="less">

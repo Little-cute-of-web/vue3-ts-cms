@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    'vue/setup-compiler-macros': true,
   },
   extends: [
     'plugin:vue/vue3-essential',
@@ -17,14 +18,14 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'linebreak-style': [0, 'error', 'windows'],
     'vue/multi-word-component-names': ['off', { ignores: [] }],
-    "@typescript-eslint/ban-types": [
-      "error",
+    '@typescript-eslint/ban-types': [
+      'error',
       {
-        "extendDefaults": true,
-        "types": {
-          "{}": false
-        }
-      }
-    ]
+        extendDefaults: true,
+        types: {
+          '{}': false,
+        },
+      },
+    ],
   },
 };

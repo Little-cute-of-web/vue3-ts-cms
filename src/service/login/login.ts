@@ -10,23 +10,20 @@ enum LoginAPI {
 export function accountLoginRequest(
   account: IAccount
 ): Promise<IDataType<ILoginResult>> {
-  return hyRequest.request<IDataType<ILoginResult>>({
+  return hyRequest.post<IDataType<ILoginResult>>({
     url: LoginAPI.AccountLogin,
-    method: 'POST',
     data: account,
   });
 }
 export function requestUserInfoById(id: number) {
-  return hyRequest.request<IDataType>({
+  return hyRequest.get<IDataType>({
     url: LoginAPI.LoginUserInfo + id,
-    method: 'GET',
     showLoading: false,
   });
 }
 export function requestUserMenusByRoleId(id: number) {
-  return hyRequest.request<IDataType>({
+  return hyRequest.get<IDataType>({
     url: LoginAPI.UserMenus + id + '/menu',
-    method: 'GET',
     showLoading: false,
   });
 }

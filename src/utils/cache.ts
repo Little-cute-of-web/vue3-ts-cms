@@ -3,7 +3,11 @@ class localCache {
     localStorage.setItem(key, JSON.stringify(value));
   }
   getCache(key: string) {
-    return JSON.parse(localStorage.getItem(key) as string);
+    if (localStorage.getItem(key)) {
+      return JSON.parse(localStorage.getItem(key) as string);
+    } else {
+      return null;
+    }
   }
   deleteCache(key: string) {
     localStorage.removeItem(key);
