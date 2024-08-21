@@ -4,7 +4,7 @@
       <Component :is="isFold ? 'expand' : 'fold'"></Component>
     </el-icon>
     <div class="content">
-      <Breadcrumb :breadcrumb="breadcrumb"></Breadcrumb>>
+      <Breadcrumb :breadcrumb="breadcrumb"></Breadcrumb>
       <UserInfo></UserInfo>
     </div>
   </div>
